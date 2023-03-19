@@ -1,0 +1,12 @@
+body {
+  font-family: cursive;
+}
+
+a {
+  text-decoration: none;
+}
+.styleTextField {
+  background-color: #f4f4f4;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
