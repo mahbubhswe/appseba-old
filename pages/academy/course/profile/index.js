@@ -6,6 +6,8 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import Profile from "../../../../components/Profile";
+import ProfilePageAnim from "../../../../components/ProfilePageAnim";
 import React from "react";
 import { useLocalStorage, deleteFromStorage } from "@rehooks/local-storage";
 import dynamic from "next/dynamic";
@@ -14,7 +16,6 @@ import Link from "next/link";
 import Typewriter from "typewriter-effect";
 import Cookies from "js-cookie";
 import Head from "next/head";
-
 function UserProfile() {
   const [userInfo] = useLocalStorage("userInfo");
   return (
@@ -35,26 +36,41 @@ function UserProfile() {
               }}
             />
           </Typography>
-          <Paper sx={{ p: "20px" }}>
+          <Paper sx={{ px: "20px", py: "10px" }}>
+            <center>
+              <Profile />
+            </center>
             <Divider>
               <Typography fontWeight={800} fontSize={20}>
-                Profile Information
+                <strong>{userInfo ? userInfo.name : null}</strong>
               </Typography>
             </Divider>
-            <Typography>
-              Name: <strong>{userInfo ? userInfo.name : null}</strong>
-            </Typography>
+
             <Typography>
               Phone: <strong>{userInfo ? userInfo.phone : null}</strong>
             </Typography>
             <Typography>
-              Email: <strong>{userInfo ? userInfo.email : null}</strong>
+              Email:{" "}
+              <strong>
+                {userInfo ? userInfo.email : null} (
+                <span style={{ color: "green", fontWeight: 900 }}>
+                  Verifyed
+                </span>
+                )
+              </strong>
             </Typography>
             <Typography>
               Address: <strong>{userInfo ? userInfo.address : null}</strong>
             </Typography>
             <Typography>
+              Payable: <strong>6000 tk</strong>
+            </Typography>
+            <Typography>
               Paid: <strong>{userInfo ? userInfo.paidAmount : null} tk</strong>
+            </Typography>
+            <Typography>
+              Due:{" "}
+              <strong>{userInfo ? 6000 - userInfo.paidAmount : null} tk</strong>
             </Typography>
             <Typography>
               Joined:{" "}
@@ -99,6 +115,8 @@ function UserProfile() {
             </Button>
           </Paper>
         </Container>
+
+        <ProfilePageAnim />
       </div>
     </React.Fragment>
   );
